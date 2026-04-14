@@ -1,0 +1,19 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main  # Рекомендуется использовать стабильную версию! например :v0.8.6 вместо :main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "${WEBUI_PORT:-3000}:8080"
+    volumes:
+      # Монтируем локальную папку data со ВСЕМИ данными
+      - ./data:/app/backend/data
+    environment:
+      - WEBUI_NAME=${WEBUI_NAME:-Open WebUI}
+      - WEBUI_URL=${WEBUI_URL:-http://localhost:3000}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

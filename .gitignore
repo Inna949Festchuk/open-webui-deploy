@@ -1,0 +1,13 @@
+# Данные (не храним в Git)
+data/
+*.db
+
+# Архивы с бэкапами
+backups/*.tar.gz
+backups/*.db
+*.tar.gz
+*.zip
+
+# Системные файлы
+.DS_Store
+.env.local
